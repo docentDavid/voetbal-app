@@ -1,35 +1,39 @@
-import { notFound } from 'next/navigation'
-import { getMatchDay } from '@/app/actions/match-days'
-import { getUser } from '@/app/actions/auth'
-import { TopNav, BottomNav } from '@/components/navigation'
-import { MatchDayDetails } from './match-day-details'
-import { RegistrationForm } from './registration-form'
-import { EditMatchDayButton } from './edit-match-day-button'
+import { notFound } from "next/navigation";
+import { getMatchDay } from "@/app/actions/match-days";
+import { getUser } from "@/app/actions/auth";
+import { TopNav, BottomNav } from "@/components/navigation";
+import { MatchDayDetails } from "./match-day-details";
+import { RegistrationForm } from "./registration-form";
+import { EditMatchDayButton } from "./edit-match-day-button";
 
-export const dynamic = 'force-dynamic'
+export const dynamic = "force-dynamic";
 
-export default async function MatchDayPage({ params }: { params: { id: string } }) {
-  const { id } = await params
+export default async function MatchDayPage({
+  params,
+}: {
+  params: { id: string };
+}) {
+  const { id } = await params;
 
   try {
-    const matchDay = await getMatchDay(id)
-    const user = await getUser()
+    const matchDay = await getMatchDay(id);
+    const user = await getUser();
 
     if (!user) {
-      notFound()
+      notFound();
     }
 
     const userRegistration = matchDay.registrations?.find(
       (reg) => reg.user_id === user.id
-    )
+    );
 
-    const date = new Date(matchDay.date)
-    const dayName = date.toLocaleDateString('nl-NL', { weekday: 'long' })
-    const dateStr = date.toLocaleDateString('nl-NL', {
-      day: 'numeric',
-      month: 'long',
-      year: 'numeric'
-    })
+    const date = new Date(matchDay.date);
+    const dayName = date.toLocaleDateString("nl-NL", { weekday: "long" });
+    const dateStr = date.toLocaleDateString("nl-NL", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    });
 
     return (
       <>
@@ -63,8 +67,8 @@ export default async function MatchDayPage({ params }: { params: { id: string } 
         </div>
         <BottomNav />
       </>
-    )
-  } catch (error) {
-    notFound()
+    );
+  } catch {
+    notFound();
   }
 }

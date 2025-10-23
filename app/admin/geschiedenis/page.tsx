@@ -1,18 +1,21 @@
-import { getAllMatchDays } from '@/app/actions/admin'
-import { TopNav, BottomNav } from '@/components/navigation'
-import { Card } from '@/components/ui/card'
-import Link from 'next/link'
+import { getAllMatchDays } from "@/app/actions/admin";
+import { TopNav, BottomNav } from "@/components/navigation";
+import { Card } from "@/components/ui/card";
+import Link from "next/link";
+import { MatchDayWithDetails } from "@/lib/types/database";
 
-export const dynamic = 'force-dynamic'
+export const dynamic = "force-dynamic";
 
 export default async function GeschiedenisPage() {
-  const matchDays = await getAllMatchDays()
+  const matchDays = await getAllMatchDays();
 
-  const today = new Date()
-  today.setHours(0, 0, 0, 0)
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
 
-  const pastMatchDays = matchDays.filter(md => new Date(md.date) < today)
-  const upcomingMatchDays = matchDays.filter(md => new Date(md.date) >= today)
+  const pastMatchDays = matchDays.filter((md) => new Date(md.date) < today);
+  const upcomingMatchDays = matchDays.filter(
+    (md) => new Date(md.date) >= today
+  );
 
   return (
     <>
@@ -28,10 +31,15 @@ export default async function GeschiedenisPage() {
             {/* Upcoming */}
             {upcomingMatchDays.length > 0 && (
               <div>
-                <h2 className="text-2xl font-semibold mb-4">Aankomende speeldagen</h2>
+                <h2 className="text-2xl font-semibold mb-4">
+                  Aankomende speeldagen
+                </h2>
                 <div className="grid gap-4 md:grid-cols-2">
                   {upcomingMatchDays.map((matchDay) => (
-                    <MatchDayHistoryCard key={matchDay.id} matchDay={matchDay} />
+                    <MatchDayHistoryCard
+                      key={matchDay.id}
+                      matchDay={matchDay}
+                    />
                   ))}
                 </div>
               </div>
@@ -39,13 +47,21 @@ export default async function GeschiedenisPage() {
 
             {/* Past */}
             <div>
-              <h2 className="text-2xl font-semibold mb-4">Gespeelde speeldagen</h2>
+              <h2 className="text-2xl font-semibold mb-4">
+                Gespeelde speeldagen
+              </h2>
               {pastMatchDays.length === 0 ? (
-                <p className="text-muted text-center py-8">Nog geen gespeelde speeldagen</p>
+                <p className="text-muted text-center py-8">
+                  Nog geen gespeelde speeldagen
+                </p>
               ) : (
                 <div className="grid gap-4 md:grid-cols-2">
                   {pastMatchDays.map((matchDay) => (
-                    <MatchDayHistoryCard key={matchDay.id} matchDay={matchDay} isPast />
+                    <MatchDayHistoryCard
+                      key={matchDay.id}
+                      matchDay={matchDay}
+                      isPast
+                    />
                   ))}
                 </div>
               )}
@@ -55,20 +71,32 @@ export default async function GeschiedenisPage() {
       </div>
       <BottomNav />
     </>
-  )
+  );
 }
 
-function MatchDayHistoryCard({ matchDay, isPast = false }: { matchDay: any; isPast?: boolean }) {
-  const date = new Date(matchDay.date)
-  const dayName = date.toLocaleDateString('nl-NL', { weekday: 'long' })
-  const dateStr = date.toLocaleDateString('nl-NL', { day: 'numeric', month: 'long', year: 'numeric' })
-  const registrationCount = matchDay.registrations?.length || 0
+function MatchDayHistoryCard({
+  matchDay,
+  isPast = false,
+}: {
+  matchDay: MatchDayWithDetails;
+  isPast?: boolean;
+}) {
+  const date = new Date(matchDay.date);
+  const dayName = date.toLocaleDateString("nl-NL", { weekday: "long" });
+  const dateStr = date.toLocaleDateString("nl-NL", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
+  const registrationCount = matchDay.registrations?.length || 0;
 
   return (
     <Link href={`/speeldagen/${matchDay.id}`}>
       <Card
         hover
-        className={`${isPast ? 'opacity-75' : ''} ${matchDay.cancelled ? 'opacity-50' : ''}`}
+        className={`${isPast ? "opacity-75" : ""} ${
+          matchDay.cancelled ? "opacity-50" : ""
+        }`}
       >
         <div className="flex items-start justify-between mb-3">
           <div>
@@ -83,9 +111,11 @@ function MatchDayHistoryCard({ matchDay, isPast = false }: { matchDay: any; isPa
             <p className="text-sm text-muted">{dateStr}</p>
           </div>
           <div className="text-right">
-            <div className="text-2xl font-bold text-primary">{registrationCount}</div>
+            <div className="text-2xl font-bold text-primary">
+              {registrationCount}
+            </div>
             <div className="text-xs text-muted">
-              {registrationCount === 1 ? 'speler' : 'spelers'}
+              {registrationCount === 1 ? "speler" : "spelers"}
             </div>
           </div>
         </div>
@@ -102,5 +132,5 @@ function MatchDayHistoryCard({ matchDay, isPast = false }: { matchDay: any; isPa
         </div>
       </Card>
     </Link>
-  )
+  );
 }
