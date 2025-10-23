@@ -7,10 +7,6 @@ export const dynamic = 'force-dynamic'
 export default async function InfoPage() {
   const locations = await getLocations()
 
-  function handleLocationClick(address: string) {
-    // This will be handled client-side
-  }
-
   return (
     <>
       <TopNav />

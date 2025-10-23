@@ -2,6 +2,7 @@ import { getAllMatchDays } from '@/app/actions/admin'
 import { TopNav, BottomNav } from '@/components/navigation'
 import { Card } from '@/components/ui/card'
 import Link from 'next/link'
+import { MatchDayWithDetails } from '@/lib/types/database'
 
 export const dynamic = 'force-dynamic'
 
@@ -58,7 +59,7 @@ export default async function GeschiedenisPage() {
   )
 }
 
-function MatchDayHistoryCard({ matchDay, isPast = false }: { matchDay: any; isPast?: boolean }) {
+function MatchDayHistoryCard({ matchDay, isPast = false }: { matchDay: MatchDayWithDetails; isPast?: boolean }) {
   const date = new Date(matchDay.date)
   const dayName = date.toLocaleDateString('nl-NL', { weekday: 'long' })
   const dateStr = date.toLocaleDateString('nl-NL', { day: 'numeric', month: 'long', year: 'numeric' })

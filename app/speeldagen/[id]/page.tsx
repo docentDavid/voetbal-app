@@ -64,7 +64,7 @@ export default async function MatchDayPage({ params }: { params: { id: string } 
         <BottomNav />
       </>
     )
-  } catch (error) {
+  } catch {
     notFound()
   }
 }
