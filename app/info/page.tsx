@@ -10,7 +10,7 @@ export default async function InfoPage() {
   return (
     <>
       <TopNav />
-      <div className="min-h-screen bg-background pb-20 lg:pb-8">
+      <div className="min-h-screen bg-gray-50 pb-20 lg:pb-8">
         <div className="container mx-auto px-4 py-8 max-w-3xl">
           <div className="mb-8">
             <h1 className="text-4xl font-bold mb-2">Locaties</h1>
@@ -31,7 +31,7 @@ export default async function InfoPage() {
                 <CardContent>
                   <div className="space-y-4">
                     <div>
-                      <div className="text-sm text-muted mb-1">Adres</div>
+                      <div className="text-sm text-gray-600 mb-1">Adres</div>
                       <div className="font-medium">{location.address}</div>
                     </div>
 
@@ -41,7 +41,7 @@ export default async function InfoPage() {
                       )}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-light transition-colors"
+                      className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
                     >
                       <span>🗺️</span>
                       <span>Navigeer naar locatie</span>

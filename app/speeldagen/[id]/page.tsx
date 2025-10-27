@@ -38,14 +38,14 @@ export default async function MatchDayPage({
     return (
       <>
         <TopNav />
-        <div className="min-h-screen bg-background pb-20 lg:pb-8">
+        <div className="min-h-screen bg-gray-50 pb-20 lg:pb-8">
           <div className="container mx-auto px-4 py-8 max-w-3xl">
             <div className="mb-6">
               <div className="flex items-center justify-between mb-2">
                 <h1 className="text-4xl font-bold capitalize">{dayName}</h1>
                 <EditMatchDayButton matchDay={matchDay} />
               </div>
-              <p className="text-muted">{dateStr}</p>
+              <p className="text-gray-600">{dateStr}</p>
               {matchDay.cancelled && (
                 <div className="mt-3 p-3 bg-red-100 dark:bg-red-900/30 border border-red-200 dark:border-red-800 rounded-lg">
                   <p className="text-red-600 dark:text-red-400 font-medium">

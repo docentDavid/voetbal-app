@@ -20,11 +20,11 @@ export default async function GeschiedenisPage() {
   return (
     <>
       <TopNav />
-      <div className="min-h-screen bg-background pb-20 lg:pb-8">
+      <div className="min-h-screen bg-gray-50 pb-20 lg:pb-8">
         <div className="container mx-auto px-4 py-8 max-w-5xl">
           <div className="mb-8">
             <h1 className="text-4xl font-bold mb-2">Geschiedenis</h1>
-            <p className="text-muted">Overzicht van alle speeldagen</p>
+            <p className="text-gray-600">Overzicht van alle speeldagen</p>
           </div>
 
           <div className="space-y-8">
@@ -51,7 +51,7 @@ export default async function GeschiedenisPage() {
                 Gespeelde speeldagen
               </h2>
               {pastMatchDays.length === 0 ? (
-                <p className="text-muted text-center py-8">
+                <p className="text-gray-600 text-center py-8">
                   Nog geen gespeelde speeldagen
                 </p>
               ) : (
@@ -108,13 +108,13 @@ function MatchDayHistoryCard({
                 </span>
               )}
             </div>
-            <p className="text-sm text-muted">{dateStr}</p>
+            <p className="text-sm text-gray-600">{dateStr}</p>
           </div>
           <div className="text-right">
-            <div className="text-2xl font-bold text-primary">
+            <div className="text-2xl font-bold text-blue-600">
               {registrationCount}
             </div>
-            <div className="text-xs text-muted">
+            <div className="text-xs text-gray-600">
               {registrationCount === 1 ? "speler" : "spelers"}
             </div>
           </div>
